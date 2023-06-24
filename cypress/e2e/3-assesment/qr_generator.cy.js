@@ -247,20 +247,19 @@ describe("QR Code Generator", () => {
       cy.get("#errorMessageID").should("have.text", "Invalid time");
     });
 
-    // it("Generate QR Code", () => {
-    //   cy.get("#gwt-uid-1").check();
-    //   cy.get(":nth-child(2) > .secondColumn > .gwt-TextBox").type("Test");
-    //   cy.get(":nth-child(9) > .secondColumn > .gwt-TextBox").type("Maslang");
-    //   cy.get(":nth-child(10) > .secondColumn > .gwt-TextBox").type(
-    //     "Deksriopsi"
-    //   );
-    //   cy.intercept("GET", "https://zxing.org/w/chart?**").as("getQR");
-    //   cy.get(".gwt-Button").click();
-    //   cy.get("#downloadlink").click();
-    //   cy.wait("@getQR")
-    //     .its("response.statusCode")
-    //     .should("be.oneOf", [200, 304, 201]);
-    // });
+    it("Generate QR Code", () => {
+      cy.get("#gwt-uid-1").check();
+      cy.get(":nth-child(2) > .secondColumn > .gwt-TextBox").type("Test");
+      cy.get(":nth-child(9) > .secondColumn > .gwt-TextBox").type("Maslang");
+      cy.get(":nth-child(10) > .secondColumn > .gwt-TextBox").type(
+        "Deksriopsi"
+      );
+      cy.intercept("GET", "https://zxing.org/w/chart?**").as("getQR");
+      cy.get(".gwt-Button").click();
+      cy.wait("@getQR")
+        .its("response.statusCode")
+        .should("be.oneOf", [200, 304, 201]);
+    });
   });
 
   context("Contact Information", () => {
@@ -365,38 +364,37 @@ describe("QR Code Generator", () => {
       cy.get("#rawtextresult").should("contain.value", "MECARD");
     });
 
-    // it("Generate QR Code", () => {
-    //   cy.get(":nth-child(1) > .secondColumn > .gwt-TextBox")
-    //     .clear()
-    //     .type("rudi baha");
-    //   cy.get(":nth-child(2) > .secondColumn > .gwt-TextBox")
-    //     .clear()
-    //     .type("company");
-    //   cy.get(":nth-child(3) > .secondColumn > .gwt-TextBox")
-    //     .clear()
-    //     .type("title");
-    //   cy.get(":nth-child(4) > .secondColumn > .gwt-TextBox")
-    //     .clear()
-    //     .type("089182777");
-    //   cy.get(":nth-child(5) > .secondColumn > .gwt-TextBox")
-    //     .clear()
-    //     .type("john@sleman.com");
-    //   cy.get(":nth-child(6) > .secondColumn > .gwt-TextBox")
-    //     .clear()
-    //     .type("address");
-    //   cy.get(":nth-child(8) > .secondColumn > .gwt-TextBox")
-    //     .clear()
-    //     .type("https://");
-    //   cy.get(":nth-child(9) > .secondColumn > .gwt-TextBox")
-    //     .clear()
-    //     .type("oke");
-    //   cy.intercept("GET", "https://zxing.org/w/chart?**").as("getQR");
-    //   cy.get(".gwt-Button").click();
-    //   cy.get("#downloadlink").click();
-    //   cy.wait("@getQR")
-    //     .its("response.statusCode")
-    //     .should("be.oneOf", [200, 304, 201]);
-    // });
+    it("Generate QR Code", () => {
+      cy.get(":nth-child(1) > .secondColumn > .gwt-TextBox")
+        .clear()
+        .type("rudi baha");
+      cy.get(":nth-child(2) > .secondColumn > .gwt-TextBox")
+        .clear()
+        .type("company");
+      cy.get(":nth-child(3) > .secondColumn > .gwt-TextBox")
+        .clear()
+        .type("title");
+      cy.get(":nth-child(4) > .secondColumn > .gwt-TextBox")
+        .clear()
+        .type("089182777");
+      cy.get(":nth-child(5) > .secondColumn > .gwt-TextBox")
+        .clear()
+        .type("john@sleman.com");
+      cy.get(":nth-child(6) > .secondColumn > .gwt-TextBox")
+        .clear()
+        .type("address");
+      cy.get(":nth-child(8) > .secondColumn > .gwt-TextBox")
+        .clear()
+        .type("https://");
+      cy.get(":nth-child(9) > .secondColumn > .gwt-TextBox")
+        .clear()
+        .type("oke");
+      cy.intercept("GET", "https://zxing.org/w/chart?**").as("getQR");
+      cy.get(".gwt-Button").click();
+      cy.wait("@getQR")
+        .its("response.statusCode")
+        .should("be.oneOf", [200, 304, 201]);
+    });
   });
   context("Email Address", () => {
     beforeEach(() => {
@@ -411,12 +409,21 @@ describe("QR Code Generator", () => {
       cy.get(".gwt-Button").click();
       cy.get("#errorMessageID").should("be.visible");
       cy.get("#errorMessageID").should("have.text", "Email must be present.");
-      cy.get(".secondColumn > .gwt-TextBox").clear("jo");
+      cy.get(".secondColumn > .gwt-TextBox").clear();
       cy.get(".secondColumn > .gwt-TextBox").type("john#yupmail,com");
       cy.get(".gwt-Button").click();
       cy.get("#errorMessageID").should("be.visible");
       cy.get("#errorMessageID").should("have.text", "Email is not valid.");
       /* ==== End Cypress Studio ==== */
+    });
+    it("Generate QR Code", () => {
+      cy.get(".secondColumn > .gwt-TextBox").clear();
+      cy.get(".secondColumn > .gwt-TextBox").type("mamba@gmail.com");
+      cy.intercept("GET", "https://zxing.org/w/chart?**").as("getQR");
+      cy.get(".gwt-Button").click();
+      cy.wait("@getQR")
+        .its("response.statusCode")
+        .should("be.oneOf", [200, 304, 201]);
     });
   });
 
@@ -505,6 +512,20 @@ describe("QR Code Generator", () => {
         "Longitude is not a correct value."
       );
     });
+    it("Generate QR Code", () => {
+      cy.get(":nth-child(1) > .secondColumn > .gwt-TextBox").clear().type('-2.3323232');
+      cy.get(":nth-child(2) > .secondColumn > .gwt-TextBox").clear().type("2.2323");
+      cy.get(":nth-child(3) > .secondColumn > .gwt-TextBox")
+        .clear()
+        .type("query");
+      cy.intercept("GET", "https://zxing.org/w/chart?**").as("getQR");
+      cy.get(".gwt-Button").click();
+      cy.wait("@getQR")
+        .its("response.statusCode")
+        .should("be.oneOf", [200, 304, 201]);
+    });
+
+    
   });
 
   context("Phone Number", () => {
@@ -545,6 +566,16 @@ describe("QR Code Generator", () => {
         "Phone number must be digits only."
       );
     });
+
+    it("Generate QR Code", () => {
+      cy.get(".secondColumn > .gwt-TextBox").clear().type("0851617171717");
+
+      cy.intercept("GET", "https://zxing.org/w/chart?**").as("getQR");
+      cy.get(".gwt-Button").click();
+      cy.wait("@getQR")
+        .its("response.statusCode")
+        .should("be.oneOf", [200, 304, 201]);
+    });
   });
 
   context('SMS', () => {
@@ -575,6 +606,16 @@ describe("QR Code Generator", () => {
       cy.get('#errorMessageID').should('have.text', 'Phone number must be digits only.');
       /* ==== End Cypress Studio ==== */
     });
+    it("Generate QR Code", () => {
+      cy.get('.secondColumn > .gwt-TextArea').clear().type('sms');
+      cy.get('.secondColumn > .gwt-TextBox').type('08121212');
+
+      cy.intercept("GET", "https://zxing.org/w/chart?**").as("getQR");
+      cy.get(".gwt-Button").click();
+      cy.wait("@getQR")
+        .its("response.statusCode")
+        .should("be.oneOf", [200, 304, 201]);
+    });
   });
 
 context('Text Content', () => {
@@ -591,6 +632,15 @@ context('Text Content', () => {
     cy.get('#errorMessageID').should('be.visible');
     cy.get('#errorMessageID').should('have.text', 'Text should be at least 1 character.');
     /* ==== End Cypress Studio ==== */
+  });
+  it("Generate QR Code", () => {
+    cy.get('.secondColumn > .gwt-TextArea').type('text');
+
+    cy.intercept("GET", "https://zxing.org/w/chart?**").as("getQR");
+    cy.get(".gwt-Button").click();
+    cy.wait("@getQR")
+      .its("response.statusCode")
+      .should("be.oneOf", [200, 304, 201]);
   });
 });
 
@@ -616,6 +666,14 @@ context('URL', () => {
     cy.get('#errorMessageID').should('have.text', 'URL is not valid.');
     /* ==== End Cypress Studio ==== */
   });
+  it("Generate QR Code", () => {
+    cy.get('.secondColumn > .gwt-TextBox').clear().type('https://google.com');
+    cy.intercept("GET", "https://zxing.org/w/chart?**").as("getQR");
+    cy.get(".gwt-Button").click();
+    cy.wait("@getQR")
+      .its("response.statusCode")
+      .should("be.oneOf", [200, 304, 201]);
+  });
 });
 
 context('Wifi Network', () => {
@@ -628,13 +686,22 @@ context('Wifi Network', () => {
   });
   it('SSID', () => {
     /* ==== Generated with Cypress Studio ==== */
-    cy.get(':nth-child(2) > .secondColumn > .gwt-TextBox').clear('dsa');
+    cy.get(':nth-child(2) > .secondColumn > .gwt-TextBox').clear();
     cy.get(':nth-child(2) > .secondColumn > .gwt-TextBox').type('dsadsadsa');
     cy.get('#gwt-uid-3').check();
     cy.get('.gwt-Button').click();
     cy.get('#errorMessageID').should('be.visible');
     cy.get('#errorMessageID').should('have.text', 'SSID must be at least 1 character.');
     /* ==== End Cypress Studio ==== */
+  });
+  it("Generate QR Code", () => {
+    cy.get(':nth-child(1) > .secondColumn > .gwt-TextBox').clear().type('121221');
+    cy.get('#gwt-uid-3').check();    
+    cy.intercept("GET", "https://zxing.org/w/chart?**").as("getQR");
+    cy.get(".gwt-Button").click();
+    cy.wait("@getQR")
+      .its("response.statusCode")
+      .should("be.oneOf", [200, 304, 201]);
   });
 });
 
@@ -689,12 +756,5 @@ context('General', () => {
     cy.get(':nth-child(4) > .firstColumn').should('have.text', 'Hidden?');
     /* ==== End Cypress Studio ==== */
   });
-
-  it('Barcode Size', () => {
-    
-  });
-
 });
-
-
 });
