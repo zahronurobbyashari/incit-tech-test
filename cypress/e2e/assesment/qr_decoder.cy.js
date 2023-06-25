@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-context("QR Code Generator", () => {
+context("QR Code Decoder", () => {
   beforeEach(() => {
     cy.visit("https://m28dev.github.io/qrdecoder/");
   });
