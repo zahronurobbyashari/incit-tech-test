@@ -14,6 +14,7 @@ context("QR Code Decoder", () => {
     /* ==== End Cypress Studio ==== */
   });
 
+  // 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
   it.only("Calendar Event", () => {
     cy.get("#qrcode").selectFile("cypress/fixtures/chart.png");
     cy.intercept(
