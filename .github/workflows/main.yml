@@ -30,14 +30,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Download the build folder
-        uses: actions/download-artifact@v3
-        with:
-          name: build
+      # - name: Download the build folder
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: build
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          build: npm run build
+          # build: npm run build
           start: npm run start
           browser: chrome
           record: true
